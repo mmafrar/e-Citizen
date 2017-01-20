@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title><%= title %></title>
+			<link rel='stylesheet' href='/stylesheets/style.css' />
+			<% include header.ejs %>
+		</head>
+        
+        <body>
+
+<% include side-bar.ejs %>
+<% include nav-bar.ejs %>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+</body>
+</html>
