@@ -1,9 +1,24 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var session = require('express-session');
 var router = express.Router();
-var app = express();
+var upload = multer();
 
-app.post('/login', function(req, res){
-    console.log(req.body);
+router.use(bodyParser.json()); // for parsing application/json
+router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+router.use(upload.array()); // for parsing multipart/form-data
+
+router.use(session({
+    secret: "Shh, its a secret!",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}));
+
+// Get home page
+router.post('/', function(req, res, next) { 
+    res.render('dashboard', {title: "Dashboard"});
 });
 
 module.exports = router;

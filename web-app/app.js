@@ -2,16 +2,19 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var dashboard = require('./routes/dashboard');
-
+var session = require('express-session');
 var app = express();
 
-var db = require('./models/db');
-var db_url = 'mongodb://localhost:27017/e-citizen';
+var index = require('./routes/index');
+var register = require('./routes/register');
+var login = require('./routes/login');
+var dashboard = require('./routes/dashboard');
+
+app.use('/', index);
+app.use('/register', register);
+app.use('/login', login);
+app.use('/dashboard', dashboard);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,12 +25,13 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-var routes = require('./routes/index');
-app.use('/', routes);
-app.use('/dashboard', dashboard);
+app.use(session({
+    secret: "Shh, its a secret!",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
