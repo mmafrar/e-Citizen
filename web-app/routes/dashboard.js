@@ -10,7 +10,7 @@ router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 router.use(upload.array()); // for parsing multipart/form-data
 router.use(cookieParser());
-router.use(session({secret: "Shh, its a secret!", saveUninitialized: true, resave: true}));
+router.use(session({resave: true, saveUninitialized: true, secret: "e-Citizen"}));
 
 // Get home page
 router.get('/', function(req, res, next) {

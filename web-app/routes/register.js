@@ -1,12 +1,14 @@
 var express = require('express');
-var router = express.Router();
 var bodyParser = require('body-parser');
 var multer = require('multer');
-var upload = multer();
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var mongoose = require('mongoose');
+var router = express.Router();
+var upload = multer();
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/e-citizen');
+//mongoose.connect('mongodb://localhost:27017/e-citizen');
 
 // create a schema
 var userSchema = mongoose.Schema({
@@ -25,6 +27,8 @@ var User = mongoose.model('User', userSchema);
 router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 router.use(upload.array()); // for parsing multipart/form-data
+router.use(cookieParser());
+router.use(session({resave: true, saveUninitialized: true, secret: "e-Citizen"}));
 
 // Directs the user to dashboard after successful login
 router.post('/', function(req, res, next){
@@ -47,6 +51,7 @@ router.post('/', function(req, res, next){
             res.redirect('/');
         } else {
             console.log("New person added");
+            req.session.email = userInfo.email;
             res.redirect('/dashboard');
         }
     });
