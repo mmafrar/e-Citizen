@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(upload.array()); // for parsing multipart/form-data
 app.use(cookieParser());
-app.use(session({resave: true, saveUninitialized: true, secret: "e-Citizen"}));
+app.use(session({resave: true, saveUninitialized: true, secret: "e-Citizen", cookie:{}}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
