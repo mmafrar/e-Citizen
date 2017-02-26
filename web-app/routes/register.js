@@ -3,19 +3,21 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var mongoose = require('mongoose');
 var router = express.Router();
 var upload = multer();
 
+// Importing the package necessary for DB connection
+var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-//mongoose.connect('mongodb://localhost:27017/e-citizen');
 
-// create a schema
+// Making the connection to DB
+mongoose.connect('mongodb://localhost:27017/e-citizen');
+
+// create a schema for storing user details
 var userSchema = mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
-    address: {type: String, required: true},
-    contact: {type: String, required: true},
+    contact: {type: Number, required: true},
     email: {type: String, required: true, unique: true},
     district: {type: String, required: true},
     password: {type: String, required: true}
@@ -38,7 +40,6 @@ router.post('/', function(req, res, next){
     var newUser = new User({
         firstName: userInfo.firstName,
         lastName: userInfo.lastName,
-        address: userInfo.address,
         contact: userInfo.contact,
         email: userInfo.email,
         district: userInfo.district,
@@ -52,7 +53,7 @@ router.post('/', function(req, res, next){
         } else {
             console.log("New person added");
             req.session.email = userInfo.email;
-            res.redirect('/dashboard');
+            res.redirect('/submit');
         }
     });
 });

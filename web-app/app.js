@@ -10,7 +10,7 @@ var multer = require('multer');
 var index = require('./routes/index');
 var register = require('./routes/register');
 var login = require('./routes/login');
-var dashboard = require('./routes/dashboard');
+var submit = require('./routes/submit');
 
 var app = express();
 var upload = multer();
@@ -18,7 +18,7 @@ var upload = multer();
 app.use('/', index);
 app.use('/register', register);
 app.use('/login', login);
-app.use('/dashboard', dashboard);
+app.use('/submit', submit);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

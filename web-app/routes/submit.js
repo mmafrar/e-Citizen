@@ -15,7 +15,7 @@ router.use(session({resave: true, saveUninitialized: true, secret: "e-Citizen", 
 // Get home page
 router.get('/', function(req, res, next) {
     console.log(req.session);
-    res.render('dashboard', { title: "Dashboard" });
+    res.render('submit-article', { title: "Dashboard" });
 });
 
 module.exports = router;

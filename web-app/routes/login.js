@@ -17,9 +17,9 @@ router.post('/', function(req, res, next) {
     if(!req.session.email) {
         req.session.email = req.body.email;
         console.log(req.session);
-        res.redirect('/dashboard');
+        res.redirect('/submit');
     } else {
-        res.redirect('/dashboard');
+        res.redirect('/submit');
     }
 });
 

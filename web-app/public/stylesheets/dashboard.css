@@ -126,3 +126,39 @@ body {
         margin-right: 0;
     }
 }
+
+.content {
+	padding-top: 8em;
+}
+
+.content .glyphicon {
+	padding: 50px;
+    font-size: 2.5em;
+}
+
+.content p {
+	font-size: 1.5em;
+}
+
+.container {
+	padding-top: 10px;
+}
+
+.sidebar-nav a {
+	font-size: 1.1em;
+	font-stretch: expanded;
+}
+
+.sidebar-brand {
+	padding: 30px;
+	margin-bottom: 50px;
+	align-content: right;
+}
+
+col-sm-3 a:hover{
+	background-color: grey;
+}
+
+.navbar-form.navbar-left {
+	padding-left: 200px;
+}

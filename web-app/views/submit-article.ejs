@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title><%= title %></title>
+			<link rel='stylesheet' href='/stylesheets/dashboard.css' />
+			<% include includes/header.ejs %>
+		</head>
+        
+        <body>
+
+<% include includes/side-bar.ejs %>
+<% include includes/nav-bar.ejs %>
+
+			<div class="container">
+				<div class="content">
+					<div class="row">
+						<div class="col-sm-3 text-center">
+						</div>
+						<div class="col-sm-3 text-center">
+							<a>
+								<span class="glyphicon glyphicon-font"></span>
+								<p>Local Stories</p>
+							</a>
+						</div>
+						<div class="col-sm-3 text-center">
+							<a>
+								<span class="glyphicon glyphicon-paperclip"></span>
+								<p>Issues</p>
+							</a>
+						</div>
+						<div class="col-sm-3 text-center">
+							<a>
+								<span class="glyphicon glyphicon-file"></span>
+								<p>Documents</p>
+							</a>
+						</div>
+					</div><br/><br/>
+					<div class="row">
+						<div class="col-sm-3 text-center">
+						</div>
+						<div class="col-sm-3 text-center">
+							<a>
+								<span class="glyphicon glyphicon-camera"></span>
+								<p>Photographs</p>
+							</a>
+						</div>
+						<div class="col-sm-3 text-center">
+							<a>
+								<span class="glyphicon glyphicon-volume-up"></span>
+								<p>Audios</p>
+							</a>
+						</div>
+						<div class="col-sm-3 text-center">
+							<a>
+								<span class="glyphicon glyphicon-facetime-video"></span>
+								<p>Videos</p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+</body>
+</html>
