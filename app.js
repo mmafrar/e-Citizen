@@ -2,23 +2,16 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require("cookie-parser");
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
-var multer = require('multer');
 
-var index = require('./routes/index');
-var register = require('./routes/register');
-var login = require('./routes/login');
-var submit = require('./routes/submit');
+var routes = require('./routes/index');
+var dashboard = require('./routes/dashboard');
 
 var app = express();
-var upload = multer();
 
-app.use('/', index);
-app.use('/register', register);
-app.use('/login', login);
-app.use('/submit', submit);
+var db = require('./models/db');
+var db_url = 'mongodb://localhost:27017/e-citizen';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,11 +21,13 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(upload.array()); // for parsing multipart/form-data
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({resave: true, saveUninitialized: true, secret: "e-Citizen", cookie:{}}));
 app.use(express.static(path.join(__dirname, 'public')));
+
+var routes = require('./routes/index');
+app.use('/', routes);
+app.use('/dashboard', dashboard);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
